@@ -49,7 +49,7 @@ La solution s’appuie sur un jeu de données de tickets comprenant les informat
 
 ## Schéma des données
 
-Les données brutes ne sont pas incluses dans ce dépôt. Le schéma ci-dessous décrit les colonnes principales utilisées par le projet.
+Les données brutes incluses dans ce dépôt. Le schéma ci-dessous décrit les colonnes principales utilisées par le projet.
 
 | Colonne | Description |
 | --- | --- |
@@ -86,75 +86,11 @@ Les données brutes ne sont pas incluses dans ce dépôt. Le schéma ci-dessous 
 
 Le flux documenté dans ce projet suit le scénario suivant :
 
-```text
-Quand un fichier est modifié
-            ↓
-Envoyer un e-mail (V2)
-```
+<img width="208" height="143" alt="image" src="https://github.com/user-attachments/assets/64f81d40-db86-4691-bbc6-40dd03d72498" />
+<img width="688" height="335" alt="Capture d&#39;écran 2026-10-12 103826" src="https://github.com/user-attachments/assets/9042e6cc-9c5b-4cdd-a0b3-015f9bd0599e" />
+
 
 La capture de détail indique un **temps économisé simulé de 50 minutes** sur les sept derniers jours, selon l’hypothèse de 10 minutes économisées par exécution réussie et 5 exécutions. Il s’agit d’une estimation illustrative, et non d’une mesure de productivité réelle.
-
-## Prérequis
-
-- Un compte Microsoft disposant des droits nécessaires sur Power Apps, Power Automate, SharePoint et, si besoin, Power BI.
-- Un environnement Power Platform dans lequel importer ou recréer les ressources.
-- Une liste ou une source SharePoint configurée avec les colonnes du schéma ci-dessus.
-- Les droits de lecture/écriture sur la liste SharePoint et les droits d’envoi d’e-mails pour le connecteur utilisé.
-- Le fichier d’application `Application tickets.msapp`.
-- Le rapport `Tickets.pbix`, avec ses connexions et autorisations configurées dans l’environnement cible.
-
-## Exécuter le projet
-
-### 1. Préparer SharePoint
-
-1. Créer ou sélectionner un site SharePoint de test.
-2. Créer une liste de tickets.
-3. Ajouter les colonnes nécessaires en respectant le schéma documenté ci-dessus.
-4. Vérifier les types de colonnes : texte, nombre, date, choix et notation selon le besoin.
-5. Ajouter uniquement des données de test ou anonymisées.
-
-### 2. Importer l’application Power Apps
-
-1. Ouvrir [Power Apps](https://make.powerapps.com/).
-2. Sélectionner l’environnement de travail approprié.
-3. Importer le fichier `Application tickets.msapp` ou ouvrir l’application depuis son emplacement partagé.
-4. Remplacer, si nécessaire, la connexion SharePoint par celle de l’environnement cible.
-5. Vérifier la correspondance entre les noms de colonnes de la liste et ceux utilisés dans l’application.
-6. Tester l’affichage, la consultation et la modification d’un ticket avec un compte de test.
-
-> Le lien direct vers l’application n’est pas reproduit dans ce README : il doit être ajouté dans cette section selon les droits d’accès de l’environnement, par exemple : `[Ouvrir l’application Power Apps](URL_DE_L_APPLICATION)`.
-
-### 3. Configurer le flux Power Automate
-
-1. Ouvrir [Power Automate](https://make.powerautomate.com/).
-2. Créer ou importer un flux automatisé.
-3. Configurer le déclencheur **Quand un fichier est modifié** sur l’emplacement SharePoint ou OneDrive concerné.
-4. Ajouter l’action **Envoyer un e-mail (V2)**.
-5. Renseigner les destinataires, l’objet et le contenu du message avec les champs dynamiques utiles.
-6. Enregistrer le flux, puis effectuer une modification de test.
-7. Contrôler l’historique d’exécution et la réception du message.
-
-### 4. Ouvrir le rapport Power BI
-
-1. Ouvrir Power BI Desktop ou le service Power BI selon le format de diffusion souhaité.
-2. Charger `Tickets.pbix`.
-3. Actualiser les connexions après avoir vérifié la source de données.
-4. Contrôler les visuels et les filtres avec un jeu de données de test.
-5. Publier uniquement dans un espace autorisé, après validation des règles d’accès aux données.
-
-## Captures d’écran
-
-### Vue du flux
-
-Cette capture présente le déclencheur de modification de fichier et l’action d’envoi d’e-mail.
-
-![Flux Power Automate : modification d’un fichier puis envoi d’un e-mail](assets/power-automate-flow.png)
-
-### Détail et estimation du temps économisé
-
-Cette vue présente les détails du flux et l’estimation simulée de 50 minutes économisées.
-
-![Détails du flux Power Automate et temps économisé simulé](assets/power-automate-details.png)
 
 ## Améliorations possibles
 
@@ -165,9 +101,7 @@ Cette vue présente les détails du flux et l’estimation simulée de 50 minute
 - Améliorer la recherche, le tri, la pagination et l’accessibilité de l’application.
 - Remplacer les données personnelles par des identifiants ou des vues restreintes lorsque cela est possible.
 - Sécuriser les connexions, les environnements et les variables de configuration.
-- Ajouter des tests fonctionnels et des scénarios de non-régression.
 - Documenter les dépendances et automatiser le déploiement entre environnements.
-- Compléter le rapport Power BI avec des indicateurs validés : volume par statut, délai médian de résolution, respect des priorités et satisfaction moyenne.
 - Mesurer le gain réel du flux sur une période représentative plutôt que d’utiliser uniquement l’estimation simulée.
 
 ## Fichiers fournis
@@ -178,33 +112,3 @@ Cette vue présente les détails du flux et l’estimation simulée de 50 minute
 | `Tickets.pbix` | Rapport Power BI associé au suivi des tickets. |
 | `assets/power-automate-flow.png` | Capture du flux Power Automate. |
 | `assets/power-automate-details.png` | Capture des détails du flux et de l’estimation de temps économisé. |
-
-## Licence
-
-Ce projet est proposé sous licence **MIT**, sauf indication contraire dans les fichiers ou le contexte de diffusion.
-
-```text
-MIT License
-
-Copyright (c) 2026
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-> Le titulaire des droits et l’année peuvent être précisés dans un fichier `LICENSE` séparé avant publication.
